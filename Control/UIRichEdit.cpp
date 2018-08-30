@@ -106,11 +106,11 @@ public:
 		ResetScoll,
 		ResetCmp,
 	};
-	enum SysCmd			//ÓÃÓÚ¼ÇÂ¼ÏµÍ³ÊÂ¼þ
+	enum SysCmd			//ç”¨äºŽè®°å½•ç³»ç»Ÿäº‹ä»¶
 	{		
-		SysMin	   = 1,	//ÏµÍ³×îÐ¡»¯
-		SysRestore	  , //ÏµÍ³»¹Ô­
-		SysEmpty		//¿ÕÖµ
+		SysMin	   = 1,	//ç³»ç»Ÿæœ€å°åŒ–
+		SysRestore	  , //ç³»ç»Ÿè¿˜åŽŸ
+		SysEmpty		//ç©ºå€¼
 	};
     CTxtWinHost();
     BOOL Init(CRichEditUI *re , const CREATESTRUCT *pcs);
@@ -339,7 +339,7 @@ HRESULT CreateHost(CRichEditUI *re, const CREATESTRUCT *pcs, CTxtWinHost **pptec
 
     return TRUE;
 }
-//Ëæ±ã¸ÄµãÊ²Ã´ÈÃgitÌá½»ÉÏÈ¥
+//éšä¾¿æ”¹ç‚¹ä»€ä¹ˆè®©gitæäº¤ä¸ŠåŽ»
 void FireEventUI(CRichEditUI *re,CControlUI *ctrl,EVENTTYPE_UI nT,WPARAM wParam)
 {
 	TEventUI ev;
@@ -405,7 +405,7 @@ BOOL CTxtWinHost::Init(CRichEditUI *re, const CREATESTRUCT *pcs)
     fRich = re->IsRich();
 
     cchTextMost  = re->GetLimitText();
-	//»º´æ¹ö¶¯ÌõÊôÐÔ
+	//ç¼“å­˜æ»šåŠ¨æ¡å±žæ€§
 	m_ScrollStyle= 0;
 	if( (pcs->style&ES_AUTOHSCROLL)==ES_AUTOHSCROLL )
 		m_ScrollStyle |= ES_AUTOHSCROLL;
@@ -1164,7 +1164,7 @@ void CTxtWinHost::NotifyDrawItem()
 			}
 			else 
 			{
-				pControl->SetPos(rcContain); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rcContain); // æ‰€æœ‰éžfloatå­æŽ§ä»¶æ”¾å¤§åˆ°æ•´ä¸ªå®¢æˆ·åŒº
 			}
 		}
 		m_re->Invalidate();
@@ -1183,7 +1183,7 @@ void CTxtWinHost::NotifyDrawItem()
 			}
 			else 
 			{
-				pControl->SetPos(rcContain); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rcContain); // æ‰€æœ‰éžfloatå­æŽ§ä»¶æ”¾å¤§åˆ°æ•´ä¸ªå®¢æˆ·åŒº
 			}
 		}
 		m_re->Invalidate();
@@ -1201,10 +1201,10 @@ void CTxtWinHost::NotifyDrawItem()
 			}
 			else 
 			{
-				pControl->SetPos(rcContain); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rcContain); // æ‰€æœ‰éžfloatå­æŽ§ä»¶æ”¾å¤§åˆ°æ•´ä¸ªå®¢æˆ·åŒº
 			}
 		}
-		//ÒòÎª¿Ø¼þÄÚ²¿»áµ÷ÓÃsetsel£¬ÉèÖÃ²¼¾Ö·½Ê½´Ó¶øÓ°Ïì¹ö¶¯Ìõ¶¨Î»Òò´ËÐèÒªµ÷Õûµ÷ÓÃË³Ðò
+		//å› ä¸ºæŽ§ä»¶å†…éƒ¨ä¼šè°ƒç”¨setselï¼Œè®¾ç½®å¸ƒå±€æ–¹å¼ä»Žè€Œå½±å“æ»šåŠ¨æ¡å®šä½å› æ­¤éœ€è¦è°ƒæ•´è°ƒç”¨é¡ºåº
 		if( m_re->GetVerticalScrollBar() && m_re->GetVerticalScrollBar()->IsVisible() )
 		{
 			if(m_fScrollThum==1.0)
@@ -1235,7 +1235,7 @@ void CTxtWinHost::NotifyDrawItem()
 			}
 			else 
 			{
-				pControl->SetPos(rcContain); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rcContain); // æ‰€æœ‰éžfloatå­æŽ§ä»¶æ”¾å¤§åˆ°æ•´ä¸ªå®¢æˆ·åŒº
 			}
 		}
 		m_re->Invalidate();
@@ -1888,7 +1888,7 @@ int CRichEditUI::InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanU
     ReplaceSel(lpstrText, bCanUndo);
     return nRet;*/
 	long nRet = 0;
-	//¸Ä³ÉÎÞÐ§ÊÇÎªÁËÌùÈëÎÄ±¾²»Ó°ÏìÊäÈë½¹µã
+	//æ”¹æˆæ— æ•ˆæ˜¯ä¸ºäº†è´´å…¥æ–‡æœ¬ä¸å½±å“è¾“å…¥ç„¦ç‚¹
 	if( m_pTwh )
 		m_pTwh->GetTextServices()->OnTxUIDeactivate();
 	ITextRange2 *rg = GetRange(0,0);
@@ -1908,7 +1908,7 @@ int CRichEditUI::AppendText(LPCTSTR lpstrText, bool bCanUndo)
 {
     long nRet = 0;
 	long nCurLen = GetTextLength();
-	//¸Ä³ÉÎÞÐ§ÊÇÎªÁËÌùÈëÎÄ±¾²»Ó°ÏìÊäÈë½¹µã
+	//æ”¹æˆæ— æ•ˆæ˜¯ä¸ºäº†è´´å…¥æ–‡æœ¬ä¸å½±å“è¾“å…¥ç„¦ç‚¹
 	if( m_pTwh )
 		m_pTwh->GetTextServices()->OnTxUIDeactivate();
 	ITextRange2 *rg = GetRange(0,0);
@@ -2291,8 +2291,8 @@ void CRichEditUI::OnTxNotify(DWORD iNotify, void *pv)
 	}
 }
 
-// ¶àÐÐ·Çrich¸ñÊ½µÄricheditÓÐÒ»¸ö¹ö¶¯Ìõbug£¬ÔÚ×îºóÒ»ÐÐÊÇ¿ÕÐÐÊ±£¬LineDownºÍSetScrollPosÎÞ·¨¹ö¶¯µ½×îºó
-// ÒýÈëiPos¾ÍÊÇÎªÁËÐÞÕýÕâ¸öbug
+// å¤šè¡Œéžrichæ ¼å¼çš„richeditæœ‰ä¸€ä¸ªæ»šåŠ¨æ¡bugï¼Œåœ¨æœ€åŽä¸€è¡Œæ˜¯ç©ºè¡Œæ—¶ï¼ŒLineDownå’ŒSetScrollPosæ— æ³•æ»šåŠ¨åˆ°æœ€åŽ
+// å¼•å…¥iPoså°±æ˜¯ä¸ºäº†ä¿®æ­£è¿™ä¸ªbug
 void CRichEditUI::SetScrollPos(SIZE szPos)
 {
     int cx = 0;
@@ -2373,14 +2373,14 @@ void CRichEditUI::LineDown()
 void CRichEditUI::PageUp()
 {
 	LineUp();
-	//µ÷ÓÃpageupÎ¢ÈíµÄ¹ö¶¯Î»ÖÃ¼ÆËã´íÎó
+	//è°ƒç”¨pageupå¾®è½¯çš„æ»šåŠ¨ä½ç½®è®¡ç®—é”™è¯¯
 	//TxSendMessage(WM_VSCROLL, SB_PAGEUP, 0L, 0);
 }
 
 void CRichEditUI::PageDown()
 {
 	LineDown();
-	//µ÷ÓÃpagedownÎ¢ÈíµÄ¹ö¶¯Î»ÖÃ¼ÆËã´íÎó
+	//è°ƒç”¨pagedownå¾®è½¯çš„æ»šåŠ¨ä½ç½®è®¡ç®—é”™è¯¯
 	//TxSendMessage(WM_VSCROLL, SB_PAGEDOWN, 0L, 0);
 }
 
@@ -2498,7 +2498,7 @@ void CRichEditUI::DoEvent(TEventUI& event)
 
 SIZE CRichEditUI::EstimateSize(SIZE szAvailable)
 {
-    //return CSize(m_rcItem); // ÕâÖÖ·½Ê½ÔÚµÚÒ»´ÎÉèÖÃ´óÐ¡Ö®ºó¾Í´óÐ¡²»±äÁË
+    //return CSize(m_rcItem); // è¿™ç§æ–¹å¼åœ¨ç¬¬ä¸€æ¬¡è®¾ç½®å¤§å°ä¹‹åŽå°±å¤§å°ä¸å˜äº†
     return CContainerUI::EstimateSize(szAvailable);
 }
 
@@ -2508,7 +2508,7 @@ void CRichEditUI::SetPos(RECT rc)
 	CControlUI::SetPos(rc);
     rc = m_rcItem;
 
-    /* Î¢ÈíÒÑÊµÏÖµÄÂß¼­£¬´Ë´¦ÖØ¸´ÇÒ´æÔÚ¼ÆËã´íÎó
+    /* å¾®è½¯å·²å®žçŽ°çš„é€»è¾‘ï¼Œæ­¤å¤„é‡å¤ä¸”å­˜åœ¨è®¡ç®—é”™è¯¯
     rc.left += m_rcInset.left;
     rc.top += m_rcInset.top;
     rc.right -= m_rcInset.right;
@@ -2587,7 +2587,7 @@ void CRichEditUI::SetPos(RECT rc)
 			}
 			else 
 			{
-				pControl->SetPos(rc); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rc); // æ‰€æœ‰éžfloatå­æŽ§ä»¶æ”¾å¤§åˆ°æ•´ä¸ªå®¢æˆ·åŒº
 			}
 		}
 	}
@@ -2595,7 +2595,7 @@ void CRichEditUI::SetPos(RECT rc)
 	{
 		if( CTxtWinHost::SysEmpty==m_pTwh->_SysCmd )
 		{
-			//ÓÃ»§µ÷Õû³ß´ç
+			//ç”¨æˆ·è°ƒæ•´å°ºå¯¸
 			float nRange = m_pVerticalScrollBar->GetScrollRange();
 			float nPos   = m_pVerticalScrollBar->GetScrollPos();			
 			if(m_pVerticalScrollBar->GetScrollRange()==m_pVerticalScrollBar->GetScrollPos())
@@ -2605,7 +2605,7 @@ void CRichEditUI::SetPos(RECT rc)
 		}
 		else if( CTxtWinHost::SysRestore==m_pTwh->_SysCmd )
 		{
-			//»¹Ô­Ê±ÊÕµ½µÄµÚÒ»´ÎsetposÊÇ»¹Ô­¿Ø¼þ³¤¿í
+			//è¿˜åŽŸæ—¶æ”¶åˆ°çš„ç¬¬ä¸€æ¬¡setposæ˜¯è¿˜åŽŸæŽ§ä»¶é•¿å®½
 			m_pTwh->_SysCmd = CTxtWinHost::SysEmpty;
 			if( m_pTwh->m_fScrollThum == 1.0 )
 			{
@@ -2799,25 +2799,9 @@ LRESULT CRichEditUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, boo
 	if( !IsMouseEnabled() && uMsg > WM_MOUSEFIRST && uMsg <= WM_MOUSELAST ) return 0;
 	if( uMsg == WM_MOUSEWHEEL && (LOWORD(wParam) & MK_CONTROL) == 0 ) 
 		return 0;
-	
-	if (uMsg == WM_IME_COMPOSITION)
+	if( uMsg==WM_HELP )
 	{
-		// ½â¾öÎ¢ÈíÊäÈë·¨Î»ÖÃÒì³£µÄÎÊÌâ
-		HIMC hIMC = ImmGetContext(GetManager()->GetPaintWindow());
-		if (hIMC) 
-		{
-			// Set composition window position near caret position
-			POINT point;
-			GetCaretPos(&point);
-
-			COMPOSITIONFORM Composition;
-			Composition.dwStyle = CFS_POINT|CFS_EXCLUDE;
-			Composition.ptCurrentPos.x = point.x;
-			Composition.ptCurrentPos.y = point.y;
-			ImmSetCompositionWindow(hIMC, &Composition);
-
-			ImmReleaseContext(GetManager()->GetPaintWindow(),hIMC);
-		}
+		bHandled = true;
 		return 0;
 	}
 	if( uMsg==WM_SYSCOMMAND || uMsg==WM_SIZE )
@@ -2827,7 +2811,7 @@ LRESULT CRichEditUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, boo
 			m_pTwh->_SysCmd = CTxtWinHost::SysMin;
 			if(  m_pVerticalScrollBar && m_pVerticalScrollBar->IsVisible() ) 
 			{
-				//»º´æµÚÒ»´Î×îÐ¡»¯rcÓÃÓÚÅÐ¶ÏÊ±ºò»¹Ô­
+				//ç¼“å­˜ç¬¬ä¸€æ¬¡æœ€å°åŒ–rcç”¨äºŽåˆ¤æ–­æ—¶å€™è¿˜åŽŸ
 				float nRange = m_pVerticalScrollBar->GetScrollRange();
 				float nPos   = m_pVerticalScrollBar->GetScrollPos();
 				if( nPos==nRange )
@@ -2907,36 +2891,8 @@ LRESULT CRichEditUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, boo
             return 0;
         }
     }
-    else
+    if(WM_CHAR == uMsg)
     {
-        switch( uMsg ) {
-        case WM_HELP:
-            bWasHandled = false;
-            break;
-		case WM_IME_STARTCOMPOSITION:
-		case WM_IME_ENDCOMPOSITION:
-		case WM_IME_COMPOSITIONFULL:
-		case WM_IME_NOTIFY:
-			if( IsFocused() && !IsReadOnly() )
-				TxSendMessage(uMsg, wParam, lParam, NULL);
-			/*if(uMsg==WM_IME_NOTIFY&&wParam==IMN_SETCOMPOSITIONFONT){
-				HIMC hIMC = ImmGetContext(GetManager()->GetPaintWindow());
-				HFONT hFont=(HFONT)GetStockObject(DEFAULT_GUI_FONT);
-				LOGFONT logFont={0};
-				GetObject(hFont,sizeof(logFont),&logFont);
-				DeleteObject(hFont);
-				if( hIMC )	{
-					ImmSetCompositionFont(hIMC,&logFont);
-					ImmReleaseContext(GetManager()->GetPaintWindow(),hIMC);
-				}
-			}*/
-			return 0;
-        default:
-            return 0;
-        }
-    }
-	if(WM_CHAR == uMsg)
-	{
 #ifndef _UNICODE
 		// check if we are waiting for 2 consecutive WM_CHAR messages
 		if ( IsAccumulateDBCMode() )
@@ -2977,7 +2933,7 @@ LRESULT CRichEditUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, boo
 			}
 		}
 #endif
-	}
+    }
     LRESULT lResult = 0;
     HRESULT Hr = TxSendMessage(uMsg, wParam, lParam, &lResult);
     if( Hr == S_OK ) bHandled = bWasHandled;
