@@ -1327,7 +1327,12 @@ err:
 		SetSel(0, -1);
 		ReplaceSel(pstrText, FALSE);
 	}
-
+	void CRichEditUI::SetPasswordChar(WCHAR ch)
+	{
+		m_cPassword = ch;
+		if( !m_pTwh ) return;
+		m_pTwh->SetPasswordChar(m_cPassword);
+	}
 	bool CRichEditUI::IsModify() const
 	{ 
 		if( !m_pTwh ) return false;

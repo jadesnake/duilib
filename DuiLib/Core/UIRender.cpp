@@ -2,6 +2,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "..\Utils\stb_image.h"
+#include "..\Utils\unzip.h"
 
 #ifdef USE_XIMAGE_EFFECT
 #	include "../../3rd/CxImage/ximage.h"

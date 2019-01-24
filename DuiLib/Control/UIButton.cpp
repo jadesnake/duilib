@@ -96,6 +96,11 @@ namespace DuiLib
 			}
 			return;
 		}
+		if( event.Type == DuiLib::UIEVENT_SETCURSOR )
+		{
+			::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
+			return;
+		}
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
 			if( IsEnabled() ) {

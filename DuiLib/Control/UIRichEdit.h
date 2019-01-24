@@ -113,7 +113,7 @@ namespace DuiLib {
 		LPCTSTR GetDisabledImage();
 		void SetDisabledImage(LPCTSTR pStrImage);
 		void PaintStatusImage(HDC hDC);
-
+		void SetPasswordChar(WCHAR ch);
 		void SetTipValue(LPCTSTR pStrTipValue);
 		LPCTSTR GetTipValue();
 		void SetTipValueColor(LPCTSTR pStrColor);
@@ -158,7 +158,7 @@ namespace DuiLib {
 		enum { 
 			DEFAULT_TIMERID = 20,
 		};
-
+		WCHAR m_cPassword;
 		CTxtWinHost* m_pTwh;
 		bool m_bVScrollBarFixing;
 		bool m_bWantTab;

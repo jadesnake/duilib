@@ -3,11 +3,8 @@
 
 namespace DuiLib
 {
-
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
-	//
-
 	CDuiPoint::CDuiPoint()
 	{
 		x = y = 0;
@@ -981,8 +978,22 @@ namespace DuiLib
 	{
 		::SetCursor(m_hOrigCursor);
 	}
-
-
+	/////////////////////////////////////////////////////////////////////////////////////
+	//
+	FILETIME dosdatetime2filetime(WORD dosdate,WORD dostime)
+	{ // date: bits 0-4 are day of month 1-31. Bits 5-8 are month 1..12. Bits 9-15 are year-1980
+		// time: bits 0-4 are seconds/2, bits 5-10 are minute 0..59. Bits 11-15 are hour 0..23
+		SYSTEMTIME st;
+		st.wYear = (WORD)(((dosdate>>9)&0x7f) + 1980);
+		st.wMonth = (WORD)((dosdate>>5)&0xf);
+		st.wDay = (WORD)(dosdate&0x1f);
+		st.wHour = (WORD)((dostime>>11)&0x1f);
+		st.wMinute = (WORD)((dostime>>5)&0x3f);
+		st.wSecond = (WORD)((dostime&0x1f)*2);
+		st.wMilliseconds = 0;
+		FILETIME ft; SystemTimeToFileTime(&st,&ft);
+		return ft;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//

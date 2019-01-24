@@ -865,8 +865,8 @@ namespace DuiLib
 		}
 
 		if( !m_sButton1NormalImage.IsEmpty() ) {
-			if( !DrawImage(hDC, (LPCTSTR)m_sButton1NormalImage, (LPCTSTR)m_sImageModify) ) {}
-			else return;
+			DrawImage(hDC, (LPCTSTR)m_sButton1NormalImage, (LPCTSTR)m_sImageModify);
+			return ;
 		}
 
 		DWORD dwBorderColor = 0xFF85E4FF;
@@ -907,8 +907,8 @@ namespace DuiLib
 		}
 
 		if( !m_sButton2NormalImage.IsEmpty() ) {
-			if( !DrawImage(hDC, (LPCTSTR)m_sButton2NormalImage, (LPCTSTR)m_sImageModify) ) {}
-			else return;
+			DrawImage(hDC, (LPCTSTR)m_sButton2NormalImage, (LPCTSTR)m_sImageModify);
+			return ;
 		}
 
 		DWORD dwBorderColor = 0xFF85E4FF;

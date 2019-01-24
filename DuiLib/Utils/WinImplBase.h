@@ -2,7 +2,7 @@
 
 #ifndef WIN_IMPL_BASE_HPP
 #define WIN_IMPL_BASE_HPP
-
+#include "../Core/UIManager.h"
 namespace DuiLib
 {
 	class UILIB_API WindowImplBase
@@ -26,8 +26,10 @@ namespace DuiLib
 		DUI_DECLARE_MESSAGE_MAP()
 		virtual void OnClick(TNotifyUI& msg);
 		virtual BOOL IsInStaticControl(CControlUI *pControl);
-
 	protected:
+		virtual LPCTSTR GetResourceID() const;
+		virtual CDuiString GetZIPFileName() const;
+		virtual UILIB_RESTYPE GetResourceType() const;
 		virtual CDuiString GetSkinType() { return _T(""); }
 		virtual CDuiString GetSkinFile() = 0;
 		virtual LPCTSTR GetWindowClassName(void) const = 0 ;

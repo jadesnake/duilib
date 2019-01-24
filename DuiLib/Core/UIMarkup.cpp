@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include "../Utils/unzip.h"
 
 #ifndef TRACE
 #define TRACE

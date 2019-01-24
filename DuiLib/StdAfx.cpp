@@ -6,4 +6,3 @@
 
 #pragma comment( lib, "winmm.lib" )
 #pragma comment( lib, "comctl32.lib" )
-#pragma comment( lib, "CxImage.lib")

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="DuiLib08"
+	Name="DuiLib"
 	ProjectGUID="{F0D8FD98-C62D-4FDA-A4A2-2AB530416EDC}"
 	RootNamespace="DuiLib08"
 	Keyword="Win32Proj"
@@ -61,7 +61,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\DuiLib.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -125,7 +124,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\DuiLib.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -746,38 +744,6 @@
 			<File
 				RelativePath=".\Utils\unzip.cpp"
 				>
-				<FileConfiguration
-					Name="Lib Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Lib Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DLL Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DLL Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\Utils\unzip.h"

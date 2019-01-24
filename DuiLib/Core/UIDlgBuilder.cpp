@@ -131,7 +131,9 @@ namespace DuiLib {
 							shared = (_tcsicmp(pstrValue, _T("true")) == 0);
 						}
 					}
-					if( id >= 0 ) {
+					if(id==-1)
+ 						id = pManager->GetCustomFontCount(shared);
+ 					if( id >= 0 ) {
 						pManager->AddFont(id, pFontName, size, bold, underline, italic, shared);
 						if( defaultfont ) pManager->SetDefaultFont(pFontName, pManager->GetDPIObj()->Scale(size), bold, underline, italic, shared);
 					}

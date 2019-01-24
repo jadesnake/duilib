@@ -1,10 +1,11 @@
+#include "stdafx.h"
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <tchar.h>
 #include "unzip.h"
-
+#include "Utils.h"
 #pragma warning(disable : 4996)	// disable bogus deprecation warning
 
 // THIS FILE is almost entirely based upon code by Jean-loup Gailly
@@ -3734,23 +3735,6 @@ FILETIME timet2filetime(const lutime_t t)
   return ft;
 }
 
-FILETIME dosdatetime2filetime(WORD dosdate,WORD dostime)
-{ // date: bits 0-4 are day of month 1-31. Bits 5-8 are month 1..12. Bits 9-15 are year-1980
-  // time: bits 0-4 are seconds/2, bits 5-10 are minute 0..59. Bits 11-15 are hour 0..23
-  SYSTEMTIME st;
-  st.wYear = (WORD)(((dosdate>>9)&0x7f) + 1980);
-  st.wMonth = (WORD)((dosdate>>5)&0xf);
-  st.wDay = (WORD)(dosdate&0x1f);
-  st.wHour = (WORD)((dostime>>11)&0x1f);
-  st.wMinute = (WORD)((dostime>>5)&0x3f);
-  st.wSecond = (WORD)((dostime&0x1f)*2);
-  st.wMilliseconds = 0;
-  FILETIME ft; SystemTimeToFileTime(&st,&ft);
-  return ft;
-}
-
-
-
 class TUnzip
 { public:
   TUnzip(const char *pwd) : uf(0), unzbuf(0), currentfile(-1), czei(-1), password(0) {if (pwd!=0) {password=new char[strlen(pwd)+1]; strcpy(password,pwd);}}
@@ -3886,7 +3870,7 @@ ZRESULT TUnzip::Get(int index,ZIPENTRY *ze)
   //
   WORD dostime = (WORD)(ufi.dosDate&0xFFFF);
   WORD dosdate = (WORD)((ufi.dosDate>>16)&0xFFFF);
-  FILETIME ftd = dosdatetime2filetime(dosdate,dostime);
+  FILETIME ftd = DuiLib::dosdatetime2filetime(dosdate,dostime);
   FILETIME ft; LocalFileTimeToFileTime(&ftd,&ft);
   ze->atime=ft; ze->ctime=ft; ze->mtime=ft;
   // the zip will always have at least that dostime. But if it also has
@@ -3927,7 +3911,7 @@ ZRESULT TUnzip::Get(int index,ZIPENTRY *ze)
 ZRESULT TUnzip::Find(const TCHAR *tname,bool ic,int *index,ZIPENTRY *ze)
 { char name[MAX_PATH];
 #ifdef UNICODE
-  WideCharToMultiByte(CP_UTF8,0,tname,-1,name,MAX_PATH,0,0);
+  WideCharToMultiByte(CP_ACP,0,tname,-1,name,MAX_PATH,0,0);
 #else
   strcpy(name,tname);
 #endif

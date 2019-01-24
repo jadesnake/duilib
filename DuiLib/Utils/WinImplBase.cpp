@@ -274,23 +274,80 @@ namespace DuiLib
 #endif
 		return lRes;
 	}
-
+	void xorDecrypt(unsigned char *buf,const int len,char key)
+	{
+		unsigned char *iter,*end;
+		end=buf+len;
+		iter=buf;
+		while(iter<end)
+		{
+			*iter = (*iter) ^ key;
+			*iter = ((*iter & 0x0F)<<4)+((*iter & 0xF0)>>4);
+			iter++;
+		}
+	}
+	UILIB_RESTYPE WindowImplBase::GetResourceType() const
+	{
+		return UILIB_FILE;
+	}
+	CDuiString WindowImplBase::GetZIPFileName() const
+	{
+		return _T("");
+	}
+	LPCTSTR WindowImplBase::GetResourceID() const
+	{
+		return _T("");
+	}
 	LRESULT WindowImplBase::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
 		// 调整窗口样式
 		LONG styleValue = ::GetWindowLong(*this, GWL_STYLE);
 		styleValue &= ~WS_CAPTION;
 		::SetWindowLong(*this, GWL_STYLE, styleValue | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
-
 		// 关联UI管理器
 		m_pm.Init(m_hWnd, GetManagerName());
 		// 注册PreMessage回调
 		m_pm.AddPreMessageFilter(this);
-
+		CDialogBuilder builder;
+		if(m_pm.GetResourcePath().IsEmpty())
+		{	// 允许更灵活的资源路径定义
+			CDuiString strResourcePath = m_pm.GetInstancePath();
+			strResourcePath += GetSkinFile().GetData();
+			m_pm.SetResourcePath(strResourcePath.GetData());
+		}
+		switch(GetResourceType())
+		{
+		case UILIB_ZIP:
+			m_pm.SetResourceZip(GetZIPFileName().GetData(), true);
+			break;
+		case UILIB_ZIPRESOURCE:
+			{
+				HRSRC hResource = ::FindResource(m_pm.GetResourceDll(), GetResourceID(), _T("ZIPRES"));
+				if( hResource == NULL )
+					return 0L;
+				DWORD dwSize = 0;
+				HGLOBAL hGlobal = ::LoadResource(m_pm.GetResourceDll(), hResource);
+				if( hGlobal == NULL ) 
+				{
+					::FreeResource(hResource);
+					return 0L;
+				}
+				dwSize = ::SizeofResource(m_pm.GetResourceDll(), hResource);
+				if( dwSize == 0 )	return 0L;
+				LPBYTE lpReZIPBuffer = new BYTE[ dwSize ];
+				if (lpReZIPBuffer != NULL)
+				{
+					::CopyMemory(lpReZIPBuffer, (LPBYTE)::LockResource(hGlobal), dwSize);
+				}
+				::FreeResource(hResource);
+				xorDecrypt(lpReZIPBuffer,dwSize,'k');
+				m_pm.SetResourceZip(lpReZIPBuffer, dwSize);
+			}
+			break;
+		}
 		// 创建主窗口
 		CControlUI* pRoot=NULL;
-		CDialogBuilder builder;
-		CDuiString sSkinType = GetSkinType();
+ 		CDuiString sSkinType = GetSkinType();
 		if (!sSkinType.IsEmpty()) {
 			STRINGorID xml(_ttoi(GetSkinFile().GetData()));
 			pRoot = builder.Create(xml, sSkinType, this, &m_pm);
